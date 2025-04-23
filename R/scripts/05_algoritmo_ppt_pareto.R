@@ -4,7 +4,7 @@ library(ggplot2)
 
 #### Introdução ####
 
-n <- 1105 # (mesmo tamanho da AES)
+n <- 1106 # (mesmo tamanho da AES)
 N <- nrow(cadastro)
 data <- cadastro %>% as_tibble()
 
@@ -70,19 +70,9 @@ amostra <- amostra %>%
   )
 
 # Summary
-install.packages("skimr")
 library(skimr)
 
 skim(amostra$lambda)
-
-amostra %>% 
-  select(lambda) %>%
-  skim() %>% 
-  gt()
-
-
-
-
 
 # Tabela com resumo por faixas
 library(gt)
@@ -124,6 +114,22 @@ faixas <- amostra %>%
 
 gt_preview(faixas)
 
+
+# ggplot2::ggplot(amostra, ggplot2::aes(x = lambda, fill = quartil)) +
+#   ggplot2::geom_histogram(
+#     color = "black",
+#     linewidth = 0.3
+#   ) +
+#   RColorBrewer::display.brewer.all() +
+#   ggplot2::labs(
+#     x = "Log da Probabilidade de Inclusão Desejada",
+#     y = "Frequência"
+#   ) +
+#   ggplot2::theme_classic() +
+#   ggplot2::theme(
+#     axis.title.x = ggplot2::element_text(face = "plain", size = 12),
+#     axis.title.y = ggplot2::element_text(face = "plain", size = 12)
+#   )
 
 ggplot2::ggplot(amostra, ggplot2::aes(x = lambda, fill = quartil)) +
   ggplot2::geom_histogram(
